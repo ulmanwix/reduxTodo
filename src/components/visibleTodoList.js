@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions';
 import TodoList from './TodoList';
+import Filters from '../store/Filters';
 
 class VisibleTodoList extends React.Component {
     constructor(props) {
@@ -19,14 +20,34 @@ class VisibleTodoList extends React.Component {
 
     render() {
         return (
-            <TodoList todos={this.props.todos} onTodoClick={(id) => actions.toggleTodo(id)}/>
+            <TodoList 
+                todos={this.props.todos} 
+                onTodoClick={(id) => {this.props.toggleTodo(id)}}
+            />
         )
     }
 }
 
+const isTodoCompleted = (todo) => todo.done === true;
+
+const getFilterFunc = filter => {
+    switch (filter) {
+        case Filters.all: 
+            return todo => todo;
+        case Filters.completed: 
+            return todo => isTodoCompleted(todo);
+        case Filters.pending:
+            return todo => !isTodoCompleted(todo);
+        default:
+            return x => x;
+    }
+}
+
 function mapStateToProps(state, ownProps) {
+    const isTodoVisible = getFilterFunc(state.filter);
+
     return {
-        todos: state.todos.filter((todo) => todo === todo ), // TODO: Add filtering logic
+        todos: state.todos.filter(isTodoVisible), // TODO: Add filtering logic
     }
 }
 

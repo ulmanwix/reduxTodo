@@ -19,7 +19,7 @@ export function removeTodo(id) {
     };
 };
 
-export function toggleTodo(id) {
+export function toggleTodo(id) {    
     return {
         type: types.toggleTodo,
         payload: { id }

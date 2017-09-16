@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
-import './App.css';
-
 class Todo extends Component {
 
     constructor(props) {
@@ -15,27 +13,17 @@ class Todo extends Component {
 
     render() {
         return (
-            <li className="Todo">
+            <li className="todo">
                 <input type="checkbox"
-                       value={this.state.done}
-                       onChange={this.props.onTodoClick}
+                       checked={this.props.todo.done}
+                       onChange={() => this.props.onClick(this.props.todo.id)}
+                    //    onClick={() => this.props.onClick(this.props.todo.id)}
                 />
 
-                <h1> {this.props.title} </h1>
+                <h4> {this.props.todo.title} </h4>
             </li>
         );
     }
-}
-
-const Todo1 =  ({title, done}) => (
-    <li className="Todo">
-        <input type="checkbox" value={done} onChange={} />
-        <h1> {title} </h1>
-    </li>
-);
-
-Todo.propTypes = {
-
 }
 
 export default Todo;

@@ -22,22 +22,24 @@ class AddTodo extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="add-todo-container">
                 <input
                     value={this.state.text}
                     onChange={(e) => this.setState({text: e.target.value})}
                 />
 
-                <button onClick={() => this.addTodo('test')}/>
+                <button onClick={() => this.addTodo()}> 
+                    Add Todo
+                </button>
             </div>
         )
     }
 }
 
-function mapStateToProps(state, ownProps) {
-    return {
+// function mapStateToProps(state, ownProps) {
+//     return {
 
-    }
-}
+//     }
+// }
 
-export default connect(mapStateToProps, actions)(AddTodo);
+export default connect(null, actions)(AddTodo);

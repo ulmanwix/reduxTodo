@@ -7,7 +7,8 @@ const todo = (action, currTodo) => {
         case actionTypes.addTodo:
             return {
                 id: todoId++,
-                title: action.payload.title
+                title: action.payload.title,
+                done: false
             };
         case actionTypes.toggleTodo:
             return Object.assign({}, currTodo, { done: !currTodo.done });
@@ -25,7 +26,6 @@ export default function (state = [], action) {
                 ...state,
                 todo(action)
             ];
-            break;
         case actionTypes.removeTodo:
             let index1 = getTodoIndex(state, action.payload.id);
             return [
@@ -36,7 +36,7 @@ export default function (state = [], action) {
             let index2 = getTodoIndex(state, action.payload.id);
             return [
                 ...state.slice(0, index2),
-                todo(action),
+                todo(action, state[index2]),
                 ...state.slice(index2 + 1)
             ]
         default:
