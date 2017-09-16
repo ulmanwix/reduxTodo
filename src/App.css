@@ -24,7 +24,7 @@
 }
 
 .app-container {
-    margin-top: 3vh;
+    margin: 3vh auto;
     display: flex;
     max-width: 860px;
     justify-content: space-around;
